@@ -1,0 +1,91 @@
+Archivos
+clasificaciones de archivos= secuenciales, indexos...
+Archivos binarios, de texto. Se acede a ellos de manera diferente binario(cifrado)
+Archivos de texto
+Secuenciales(forma de acceder o visualizar los datos)
+#include<fstream.h>//extension .dat o .bin para binarios para texto .txt
+archivos de texto de entrada, hacer clase de objeto archivo //el punto open guardarlo en una funcion abrir igual para cerrar .close
+usar un template castellanizando todos los procesos para cualquier cosa que exista para archvos le hacemos un metodo
+
+plantilla de archivo (.h)  (generica defino procesos)()------------------------------------------------en el archivo de texto para entrada----|
+definicion de entidad del archivo(.h)(definir para que dato voy a trabajar(alumno... en una clase))------------------------------------------(*)--
+Implementar procesos(main.cpp)-------------------------------------------------------------------------conversion de texto a objeto<-------------|
+saber como esta constituido el archivo(definicion de entidad del archivo)
+lectura de datos (plantilla del archivo)
+pasar un metodo la funcion que va a hacer la conversion de lo que leyo coo texto a la entidad(definicion de entidad del archivo)
+clase alumno cedula nombre  del archivo leo como cadena de caracteres la cedula y el nombre con un espacio los diferencio con delimitardor(-,;|)
+(token)hast el primer delimitardor lo guardo transformandolo como atoi y va a ser la cedula del alumno con el nombre strcpy
+ y lo paso al nombre de alumno y eso lo retorno al main para usarlo como alumno y va a haber la sobrecarga de opradores
+
+
+//leer teoria de archivos ::ios,ios binari, iostex 
+///////////////////////////////////////////////////////////////////////////////////////////////
+//Archivo.h
+Template <class T>
+class Archivo
+{
+  char nom[40];//guardo el alumno ,dat .txt (nombre del archivo)
+  T buf;// se va a convertir en un buffer de alumnos...
+  fstream obj;//definir e flujo del archivo (me sirve para entrada y salida) ifstream entrada ofstream para salida
+ public:
+  Archivo() { }
+  Archivo(char *c) {strcpy(nom,c); }//crear el objeto con el nombre del archivo
+  void abrir(){obj.open(nom,ios::in);}//segundo parametro  con el in debe existir el archivo// se elaboro por ahora limitado para aarchivos de texto y de entrada(lectura)
+  void cerrar{obj.close();}
+  T get_buf(){return buf;}
+  bool es_fin(){return obj.eof();}//para saber si es el final del archivo
+  void leer(char cad[]){obj.getline(cad,180,'\n');}// metodo para leer el archivo puede haber sobrecarga(hay que sobrecargar un metodo)
+  // el 10 .letnght o con constante en el define par acomodarla global estoy leyendo linea por linea
+  void convertir(9 char cad[],T (*f)(char *k))// convertir la cadena en el buffer
+  {
+   buf=f(cad);//convertir una cadena a objeto
+  }
+   // tener procesos como imprimir guardar ordenar , sobreescribirlo convertirlo...
+   // hasta aca ya en .h
+   //
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//main.h
+class alumno{
+int ced;
+char nom[40];
+public:
+alumno(){ }
+alumno(int c,char *c){ced=c;
+strcpy(nom,c);}
+//metodos set get, sobrecargas
+
+
+};
+alumno conver(char *cad)//funcion de la calse alumno
+{
+char *p;
+char nombre[30];
+p=strtok(cad,",");
+int ced=atoi(p);
+p=(NULL,"\n");
+strcpy(nombre,p);
+retrun Alumno(ced,nom);
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//main.cpp
+int main(){
+char cad[180];
+Archivo<Alumno>arc("Alumno.txt");//forma de sacar un constructor por medio de plantillas
+arc.abrir();//solo lectura texto
+Alumno reg;
+while(true){
+  arc.leer(cad);
+  if(arc.es_fin())break;
+  arc.convertir(cad,conver);//los datos del primer alumno quedan guardados en el buffer
+  cout<<arc.get_buf();//para que funcione tengo que sobrecargar el operador <<
+}
+}
+
+
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+archivo.txt
+17516113, pedro perez
+16111222, maria diaz
+19333444, teresa ortega
+...

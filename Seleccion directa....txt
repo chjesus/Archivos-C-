@@ -1,0 +1,32 @@
+seleccion directa #fases= n-1
+se realizan n-1 fases o etapas, posicionando el menor/mayor en un extremo del arreglo
+v={19,14,11,15,12} N(5)
+fase 1= menor(11) posmenor(2)
+intercambio(v[0],v[posmenor])
+v={11,14,19,15,12}
+fase 2 =...sirve para archivos
+
+void seldir(int v[], int n){
+int aux, posmen,men,i,j;
+ for(j=1;j<n;j++){
+  men=v[j-1]; posmen=j-1;//inicializo el menor para irlo comparando
+   for(i=j;i<n;i++){
+      if(v[i]<men){
+        men=v[i];
+        posmen=i;
+       }//al salir del ciclo for i
+        if(posmen != j-1){
+          intercambio(v[posmen],v[j-1]);// una funcion aparte para intercambiar
+         }// fin del ciclo for j de fases
+// parametros diferenciados
+void intercambio(int &a int &b){
+  int aux=a;
+  a=b;
+  b=aux;}
+
+void main(){
+   int num[5]={19,14,11,15,12};
+   imprimir(num, sizeof(num)/sizeof(int));//si no lo hago asi lo puedo utilizar define al principio 
+   seldir(num, sizeof(num)/sizeof(int));
+   imprimir(num, sizeof(num)/sizeof(int));
+} //blocokdot, visual estudio
